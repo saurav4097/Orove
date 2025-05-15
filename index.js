@@ -54,7 +54,7 @@ app.get('/class', async (req, res) => {
     }
 });
 
-const FLASK_API_URL = "http://127.0.0.1:5001/chat"; // Flask API endpoint
+const FLASK_API_URL = "https://orove-ai.onrender.com/chat"; // Flask API endpoint
 
 app.post("/api/search", async (req, res) => {
     try {
