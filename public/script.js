@@ -4,6 +4,9 @@ let rawText = ""; // Store text for resuming
 let currentText = ""; // Store full text to be written
 
 let utterance; // Global speech instance
+const baseURL = window.location.hostname === "localhost"
+  ? "http://localhost:3000"
+  : "https://orove-ai.onrender.com";
 
 async function performSearch() {
     const searchInput = document.getElementById("searchInput").value.trim();
@@ -13,7 +16,7 @@ async function performSearch() {
     }
 
     try {
-        const response = await fetch("http://localhost:3000/api/search", {
+        const response = await fetch(`${baseURL}/api/search`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -179,7 +182,7 @@ async function sendMessage() {
     chatBox.innerHTML += `<div class="chat-message user">${chatInput}</div>`;
 
     try {
-        const response = await fetch("http://localhost:3000/api/chat", {
+        const response = await fetch(`${baseURL}/api/chat`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -254,7 +257,7 @@ app.get('/download/:id', async (req, res) => {
 
 async function updateNotes(topic) {
     try {
-        const response = await fetch(`http://localhost:3000/api/notes?topic=${encodeURIComponent(topic)}`);
+        const response = await fetch(`${baseURL}/api/notes?topic=${encodeURIComponent(topic)}`);
         const notes = await response.json();
 
         console.log("Received notes:", notes); // Debugging output
