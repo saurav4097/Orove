@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Design Landing Page</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">OROVE</div>
+            <ul>
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="/notes">Notes</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+            <button class="btn" onclick="window.location.href='/'">LogOut</button>
+        </nav>
+    </header>
+    <section class="hero">
+        <div class="text-content">
+            <h1><span> AI</span>  Powered</h1>
+            <h2>Virtual Classroom</h2>
+            <p>Experience the future of learning with our AI-driven virtual classroom! Our smart AI teaches concepts interactively just like a real teacher on a board. 📖🎓</p>
+            <button class="btn" onclick="window.location.href='/class'">Go To Class</button>
+            <div class="social-icons">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-twitter"></i>
+                <i class="fab fa-facebook"></i>
+            </div>
+        </div>
+       
+    </section>
+    <script>
+        const logoutUser = async () => {
+        await axios.post("/logout", {}, { withCredentials: true });
+        document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        window.location.reload();
+    };
+</script>
+</body>
+</html>

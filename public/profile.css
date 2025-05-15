@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+header {
+    margin-bottom: 20px;
+}
+
+.bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.second-bar {
+    border-bottom: none;
+}
+
+.back-button {
+    padding: 8px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+}
+
+main {
+    padding: 20px;
+}
+
+.profile h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.profile-details {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar {
+    font-size: 4rem;
+    background-color: #007bff;
+    color: #fff;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.info {
+    font-size: 1rem;
+}
+
+.info .name,
+.info .email {
+    margin: 5px 0;
+}
+
+.info span {
+    font-weight: 700;
+}
+
+.actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.card {
+    width: 45%;
+    text-align: center;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Roboto', sans-serif;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card .logo {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.shop-more {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.shop-more button {
+    padding: 10px 30px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.shop-more button:hover {
+    background-color: #218838;
+}

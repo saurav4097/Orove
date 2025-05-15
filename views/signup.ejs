@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Basic style for the error message */
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Welcome to OROVE</h1>
+            <p>Experience the future of learning with our AI-driven virtual classroom! Our smart AI teaches concepts interactively just like a real teacher on a board. 📖🎓</p>
+        </div>
+        <div class="login-section">
+            <h2>USER LOGIN</h2>
+            <form action="/signup" method="POST">  <!-- Added action and method -->
+                <div class="input-container">
+                    <i class="fa fa-user"></i>
+                    <input type="text" placeholder="Username" class="input-field" name="username" required>
+                </div>
+                <div class="input-container">
+                    <i class="fa fa-envelope"></i>
+                    <input type="email" placeholder="email" class="input-field" name="email" required>
+                </div>
+                <div class="input-container">
+                    <i class="fa fa-lock"></i>
+                    <input type="password" placeholder="Password" class="input-field" name="password" required>
+                </div>
+                <div class="remember-forgot">
+                    <label><input type="checkbox"> if you already registered</label>
+                    <a href="/">Go to login page?</a>
+                </div>
+                <button type="submit" class="login-btn">Sign Up</button>
+            
+                <% if (errorMessage) { %>
+                    <div class="error-message">
+                        <p><%= errorMessage %></p>
+                    </div>
+                <% } %>
+            </form>
+            
+        </div>
+    </div>
+</body>
+</html>

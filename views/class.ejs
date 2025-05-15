@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class</title>
+    <link rel="stylesheet" href="class.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap" rel="stylesheet">
+
+</head>
+<body>
+
+    <header>
+        <div class="logo">OROVE</div>
+        <div class="search">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button onclick="performSearch()">Search</button>
+        </div>
+        <div class="back"><button onclick="window.location.href='/home'" >Home</button></div>
+    </header>
+
+    <main>
+        <!-- Screen Section -->
+        <section class="screen" id="screen">
+            <div id="blackboard-container">
+                <div id="blackboard">
+                    
+                </div>
+            </div>
+        </section>
+        
+        <!-- Pause and Resume Buttons -->
+<div class="pause-resume-container">
+    <button onclick="pauseText()">Pause</button>
+    <button onclick="resumeText()">Resume</button>
+</div>
+
+        
+        
+        <!-- Chat Section -->
+        <aside class="chat-section">
+            <div class="chat-box" id="chatBox">
+                <div class="chat-message bot">Hello! How can I help you?</div>
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Type a message...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Notes Section -->
+    <footer>
+        <div class="notes">Notes Section</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Topic</th>
+                    <th>Download</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2">No notes found</td>
+                </tr>
+            </tbody>
+        </table>
+    </footer>
+    
+
+    <script src="script.js"></script>
+
+</body>
+</html>

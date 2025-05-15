@@ -1,0 +1,359 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background: #f4f4f4;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: #0073e6;
+    color: white;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.search {
+    width: 550px;
+    margin-right: 250px;
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+.search button {
+    background: #005bb5;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+.search button:hover {
+    background: #004999;
+}
+
+.search input {
+    width: 450px;
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.search i {
+    margin-left: 5px;
+    color: gray;
+}
+.back button {
+    background: #005bb5;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 3px;
+}
+
+.back button:hover {
+    background: #004999;
+}
+/* Main Layout */
+main {
+    display: flex;
+    flex: 1;
+    padding: 10px;
+    gap: 10px;
+}
+
+
+
+
+/* Chat Section */
+.chat-section {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: white;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+/* Chat Box */
+.chat-box {
+    flex: 1;
+    overflow-y: auto;
+    max-height: 75vh;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+/* Chat Messages */
+.chat-message {
+    max-width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 10px;
+}
+
+.bot {
+    background: #ddd;
+    align-self: flex-start;
+}
+
+.user {
+    background: #0073e6;
+    color: white;
+    align-self: flex-end;
+}
+
+/* Chat Input */
+.chat-input {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+}
+
+.chat-input button {
+    padding: 8px 15px;
+    border: none;
+    background: #0073e6;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Notes Section Styling */
+footer {
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Architects Daughter', cursive;
+    margin-top: 20px;
+    border-top: 4px solid #34495e;
+}
+
+.notes {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+table {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: white;
+    color: #333;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #34495e;
+    color: white;
+    text-transform: uppercase;
+}
+
+td {
+    font-size: 16px;
+}
+
+td a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+td a:hover {
+    color: #2980b9;
+}
+
+tbody tr:hover {
+    background: #f4f4f4;
+    transition: background 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    th, td {
+        padding: 8px;
+        font-size: 14px;
+    }
+}
+
+/* Screen Section */
+.screen {
+    width: 80%;
+    height: 500px;
+    border: 2px solid black;
+    background-color: #070606;
+    color: #ddd;
+    font-family: 'Architects Daughter', cursive; /* Use fallback */
+
+
+    overflow-y: auto; /* Enables vertical scrolling */
+    padding: 10px;
+    font-size: 18px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+@font-face {
+    font-family: 'Architects Daughter';
+    src: url('fonts/ArchitectsDaughter.ttf') format('truetype');
+}
+
+#blackboard {
+    color: #ddd;
+    width: 100%;
+    min-height: 100%;
+    padding: 10px;
+    background: black;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    font-size: 20px;
+    line-height: 1.5;
+    overflow-y: auto; /* Ensure text can scroll */
+}
+
+
+/* Ensures paragraph text follows style */
+.screen p {
+    margin: 0;
+    color: #ddd !important;
+    white-space: pre-wrap; /* Preserve spaces and line breaks */
+    word-wrap: break-word;
+}
+
+/* Blackboard Canvas */
+canvas {
+    background-color: #2c2c2c !important;
+    border: 2px solid white;
+    width: 100%;
+    height: 100%;
+}
+
+/* Blackboard Container - Not used in HTML, should be applied correctly */
+#blackboard-container {
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+    border: 2px solid black;
+    background: black;
+    position: relative;
+}
+#blackboard h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: yellow; /* Highlight topics */
+    margin: 10px 0;
+}
+
+#blackboard h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: lightblue; /* Highlight headings */
+    margin: 8px 0;
+}
+#blackboard b {
+    font-size: 22px;
+    font-weight: bold;
+    color: rgb(247, 248, 246); /* Highlight headings */
+    margin: 8px 0;
+}
+#blackboard ul {
+    padding-left: 20px;
+}
+
+#blackboard li {
+    font-size: 18px;
+    color: white;
+}
+
+
+
+
+/* General button styling */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Specific styles for pause and resume buttons */
+.pause-resume-container {
+    text-align: center;
+    margin-top: 20px; /* Adds space below the screen */
+}
+
+.pause-resume-container button {
+    background-color: #007BFF;
+    color: white;
+    margin: 10px;
+}
+
+.pause-resume-container button:hover {
+    background-color: #0056b3;
+}
+
+
+.spinner {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #fff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}

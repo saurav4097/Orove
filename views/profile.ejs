@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="profile.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="bar">
+        <div class="brand">OROVE</div>
+      </div>
+      <div class="bar second-bar">
+        <button class="back-button" onclick="window.location.href='/home'">Go Back</button>
+      </div>
+    </header>
+    
+    <main>
+      <section class="profile">
+        <% if (profile) { %>
+        <h2>Your Profile</h2>
+        <div class="profile-details">
+          <div class="avatar">👤</div>
+          <div class="info">
+            <p class="name">Name: <span><%= profile.username %></span></p>
+            <p class="email">Email: <span><%= profile.email %></span></p>
+          </div>
+        </div>
+        <% } else { %>
+            <p>You are not logged in. Please <a href="/signup">sign up</a> or <a href="/">log in</a>.</p>
+        <% } %>
+      </section>
+
+      <section class="actions">
+        <div class="card" onclick="window.location.href='/notes'">
+          <div class="logo">📚</div>
+          <p>Your Notes</p>
+        </div>
+        <div class="card" onclick="window.location.href='/class'">
+          <div class="logo">🧑🏻‍🏫</div>
+          <p>Your Class</p>
+        </div>
+      </section>
+
+      
+    </main>
+  </div>
+</body>
+</html>

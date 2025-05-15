@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Notes</title>
+<style>
+  *{margin: 0px;
+padding: 0px;
+}  
+.bar1{
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    margin-top: 0px;
+    height: 64px;
+    font-weight: bolder;
+    font-size: 27px;
+    background-color: blue;
+    color: aliceblue;  
+}
+   p{
+    padding-left: 20px;
+    font-weight: bolder;
+    font-size: 27px;
+    
+   }
+   
+.back-button {
+    margin-right: 20px;
+    color:white;
+    background-color:blue;
+    font-size: 21px;
+}
+/* Table Styling */
+table {
+    width: 80%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Table Header */
+th {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+/* Table Rows */
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Hover Effect on Rows */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Button Styling */
+button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+button:hover {
+    background-color: #218838;
+}
+</style>
+</head>
+<body>
+    <!--bar 1**********************************************************-->
+   <div class="bar1">
+    
+    <p>OROVE</p>
+    <button class="back-button" onclick="window.location.href='/home'">Go Back</button>
+    <!--bar 2**********************************************************-->
+</div>
+
+<table>
+    <tr>
+        <th>Topic</th>
+        <th>Download</th>
+    </tr>
+    <% if (notes.length > 0) { %>
+        <% notes.forEach(note => { %>
+            <tr>
+                <td><%= note.topic %></td>
+                <td>
+                    <a href="/download/<%= note._id %>">
+                        <button>Download PDF</button>
+                    </a>
+                </td>
+            </tr>
+        <% }) %>
+    <% } else { %>
+        <tr>
+            <td colspan="2">No notes found</td>
+        </tr>
+    <% } %>
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
