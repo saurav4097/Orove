@@ -48,5 +48,9 @@ def chat():
         print(f"Error: {e}")
         return jsonify({"error": str(e)}), 500
 
+@app.route('/')
+def home():
+    return 'Flask server is working!'
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5001)))
