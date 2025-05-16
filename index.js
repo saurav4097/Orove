@@ -1,3 +1,5 @@
+app.use(express.json());
+
 const fs = require('fs');
 const cookieParser = require("cookie-parser");
 const PDFDocument = require('pdfkit');
@@ -22,7 +24,7 @@ app.set("views", path.join(__dirname, "views"));
 
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+
 
 // Database connection
 // Database connection

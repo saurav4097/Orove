@@ -40,7 +40,7 @@ async function performSearch() {
         }
     } catch (error) {
         console.error("Error:", error);
-        document.getElementById("blackboard").innerHTML = "<p>Server error</p>";
+        document.getElementById("blackboard").innerHTML = `<p>Server error: ${error.message}</p>`;
     }
     document.getElementById("searchInput").value = "";
 }
