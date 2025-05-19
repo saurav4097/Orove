@@ -15,7 +15,13 @@ require("dotenv").config();
 const your_secret_key = process.env.JWT_SECRET || "supersecurekey";
 const jwt = require("jsonwebtoken");
 app.use(express.json());
-app.use(cors());
+const cors = require('cors');
+app.use(cors({
+  origin: 'https://orove-node1.onrender.com', // allow your frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
+
 app.use(cookieParser()); // Enables reading cookies
 // Set EJS as the template engine
 app.set("view engine", "ejs");
