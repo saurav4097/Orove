@@ -6,7 +6,7 @@ let currentText = ""; // Store full text to be written
 let utterance; // Global speech instance
 const baseURL = window.location.hostname === "localhost"
   ? "http://localhost:3000"
-  : "https://orove-ai.onrender.com";
+  : "https://orove-node1.onrender.com";
 
 async function performSearch() {
     const searchInput = document.getElementById("searchInput").value.trim();
