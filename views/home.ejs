@@ -10,6 +10,7 @@
     <header>
         <nav>
             <div class="logo">OROVE</div>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
             <ul>
                 <li><a href="/profile">Profile</a></li>
                 <li><a href="/notes">Notes</a></li>
@@ -39,6 +40,15 @@
         document.cookie = "auth_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         window.location.reload();
     };
+   
+  
+  function toggleMenu() {
+    const navLinks = document.querySelector("nav ul");
+    navLinks.classList.toggle("active");
+  }
+
+
+
 </script>
 </body>
 </html>

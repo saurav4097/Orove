@@ -16,6 +16,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 nav {
@@ -24,6 +25,7 @@ nav {
     width: 100%;
     padding: 0 50px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .logo {
@@ -31,13 +33,17 @@ nav {
     font-weight: bold;
 }
 
+.menu-toggle {
+    display: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #2E3A59;
+}
+
 nav ul {
     list-style: none;
     display: flex;
-}
-
-nav ul li {
-    margin: 0 15px;
+    gap: 20px;
 }
 
 nav ul li a {
@@ -53,13 +59,21 @@ nav ul li a {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    white-space: nowrap;      /* Prevent text from wrapping */
+    width: max-content;       /* Prevents it from stretching */
+    min-width: 100px;         /* Optional: set a minimum width */
+    max-width: 120px;         /* Optional: set a max width */
+    text-align: center;       /* Center the text */
+    overflow: hidden;         /* Hide overflow if text grows */
+    text-overflow: ellipsis;  /* Add ... if content is too long */
 }
-
+/* Hero Section */
 .hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 50px;
+    flex-wrap: wrap;
 }
 
 .text-content {
@@ -96,4 +110,35 @@ nav ul li a {
 
 .image-content img {
     width: 400px;
+}
+
+/* Responsive Navbar */
+@media screen and (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        position: absolute;
+        top: 70px;
+        left: 0;
+        padding: 1rem;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .btn {
+        width: 100%;
+        margin-top: 10px;
+    }
 }
