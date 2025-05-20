@@ -1,359 +1,363 @@
+/* Reset and Base Styles */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    background: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #f4f4f4;
+  font-family: 'Architects Daughter', cursive, sans-serif;
 }
 
 /* Header */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background: #0073e6;
-    color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #0073e6;
+  color: white;
 }
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .search {
-    width: 550px;
-    margin-right: 250px;
-    display: flex;
-    align-items: center;
-    background: white;
-    padding: 5px;
-    border-radius: 5px;
-}
-.search button {
-    background: #005bb5;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 3px;
-}
-
-.search button:hover {
-    background: #004999;
+  flex: 1 1 100%;
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 10px 0;
 }
 
 .search input {
-    width: 450px;
-    border: none;
-    outline: none;
-    padding: 5px;
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 5px;
+  font-size: 1rem;
 }
 
-.search i {
-    margin-left: 5px;
-    color: gray;
+.search button {
+  background: #005bb5;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 3px;
+  margin-left: 10px;
 }
+
+.search button:hover {
+  background: #004999;
+}
+
 .back button {
-    background: #005bb5;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 3px;
+  background: #005bb5;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 3px;
 }
 
 .back button:hover {
-    background: #004999;
+  background: #004999;
 }
+
 /* Main Layout */
 main {
-    display: flex;
-    flex: 1;
-    padding: 10px;
-    gap: 10px;
-}
-
-
-
-
-/* Chat Section */
-.chat-section {
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: white;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-/* Chat Box */
-.chat-box {
-    flex: 1;
-    overflow-y: auto;
-    max-height: 75vh;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-
-/* Chat Messages */
-.chat-message {
-    max-width: 80%;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 10px;
-}
-
-.bot {
-    background: #ddd;
-    align-self: flex-start;
-}
-
-.user {
-    background: #0073e6;
-    color: white;
-    align-self: flex-end;
-}
-
-/* Chat Input */
-.chat-input {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
-}
-
-.chat-input input {
-    flex: 1;
-    padding: 8px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    outline: none;
-}
-
-.chat-input button {
-    padding: 8px 15px;
-    border: none;
-    background: #0073e6;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-/* Notes Section Styling */
-footer {
-    background: #2c3e50;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    font-family: 'Architects Daughter', cursive;
-    margin-top: 20px;
-    border-top: 4px solid #34495e;
-}
-
-.notes {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-table {
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    border-collapse: collapse;
-    background: white;
-    color: #333;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background: #34495e;
-    color: white;
-    text-transform: uppercase;
-}
-
-td {
-    font-size: 16px;
-}
-
-td a {
-    text-decoration: none;
-    color: #3498db;
-    font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-td a:hover {
-    color: #2980b9;
-}
-
-tbody tr:hover {
-    background: #f4f4f4;
-    transition: background 0.3s ease;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    th, td {
-        padding: 8px;
-        font-size: 14px;
-    }
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 10px;
+  gap: 10px;
 }
 
 /* Screen Section */
 .screen {
-    width: 80%;
-    height: 500px;
-    border: 2px solid black;
-    background-color: #070606;
-    color: #ddd;
-    font-family: 'Architects Daughter', cursive; /* Use fallback */
-
-
-    overflow-y: auto; /* Enables vertical scrolling */
-    padding: 10px;
-    font-size: 18px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  width: 100%;
+  background-color: #070606;
+  color: #ddd;
+  overflow-y: auto;
+  padding: 10px;
+  font-size: 1rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 2px solid black;
+  border-radius: 10px;
 }
-@font-face {
-    font-family: 'Architects Daughter';
-    src: url('fonts/ArchitectsDaughter.ttf') format('truetype');
+
+#blackboard-container {
+  width: 100%;
+  height: 500px;
+  overflow-y: auto;
+  background: black;
+  position: relative;
+  border-radius: 10px;
 }
 
 #blackboard {
-    color: #ddd;
-    width: 100%;
-    min-height: 100%;
-    padding: 10px;
-    background: black;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-    font-size: 20px;
-    line-height: 1.5;
-    overflow-y: auto; /* Ensure text can scroll */
+  color: #ddd;
+  width: 100%;
+  min-height: 100%;
+  padding: 10px;
+  background: black;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  overflow-y: auto;
 }
 
-
-/* Ensures paragraph text follows style */
-.screen p {
-    margin: 0;
-    color: #ddd !important;
-    white-space: pre-wrap; /* Preserve spaces and line breaks */
-    word-wrap: break-word;
-}
-
-/* Blackboard Canvas */
-canvas {
-    background-color: #2c2c2c !important;
-    border: 2px solid white;
-    width: 100%;
-    height: 100%;
-}
-
-/* Blackboard Container - Not used in HTML, should be applied correctly */
-#blackboard-container {
-    width: 100%;
-    height: 500px;
-    overflow-y: auto;
-    border: 2px solid black;
-    background: black;
-    position: relative;
-}
 #blackboard h1 {
-    font-size: 28px;
-    font-weight: bold;
-    color: yellow; /* Highlight topics */
-    margin: 10px 0;
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: yellow;
+  margin: 10px 0;
 }
 
 #blackboard h2 {
-    font-size: 22px;
-    font-weight: bold;
-    color: lightblue; /* Highlight headings */
-    margin: 8px 0;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: lightblue;
+  margin: 8px 0;
 }
+
 #blackboard b {
-    font-size: 22px;
-    font-weight: bold;
-    color: rgb(247, 248, 246); /* Highlight headings */
-    margin: 8px 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #f7f8f6;
+  margin: 8px 0;
 }
+
 #blackboard ul {
-    padding-left: 20px;
+  padding-left: 20px;
 }
 
 #blackboard li {
-    font-size: 18px;
-    color: white;
+  font-size: 1rem;
+  color: white;
 }
 
-
-
-
-/* General button styling */
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease-in-out;
+/* Chat Section */
+.chat-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
 }
 
-/* Specific styles for pause and resume buttons */
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  max-height: 75vh;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.chat-message {
+  max-width: 80%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 10px;
+}
+
+.bot {
+  background: #ddd;
+  align-self: flex-start;
+}
+
+.user {
+  background: #0073e6;
+  color: white;
+  align-self: flex-end;
+}
+
+/* Chat Input */
+.chat-input {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.chat-input button {
+  padding: 8px 15px;
+  border: none;
+  background: #0073e6;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Notes Section */
+footer {
+  background: #2c3e50;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  margin-top: 20px;
+  border-top: 4px solid #34495e;
+}
+
+.notes {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+table {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: white;
+  color: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background: #34495e;
+  color: white;
+  text-transform: uppercase;
+}
+
+td {
+  font-size: 1rem;
+}
+
+td a {
+  text-decoration: none;
+  color: #3498db;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+td a:hover {
+  color: #2980b9;
+}
+
+tbody tr:hover {
+  background: #f4f4f4;
+  transition: background 0.3s ease;
+}
+
+/* Pause and Resume Buttons */
 .pause-resume-container {
-    text-align: center;
-    margin-top: 20px; /* Adds space below the screen */
+  text-align: center;
+  margin-top: 20px;
 }
 
 .pause-resume-container button {
-    background-color: #007BFF;
-    color: white;
-    margin: 10px;
+  background-color: #007BFF;
+  color: white;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
 }
 
 .pause-resume-container button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
-
+/* Spinner */
 .spinner {
-    display: none;
-    width: 40px;
-    height: 40px;
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    border-top: 4px solid #fff;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes spin {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Responsive Design */
+
+/* Tablets and up */
+@media (min-width: 768px) {
+  .search {
+    flex: 1 1 auto;
+    margin: 0 20px;
+  }
+
+  main {
+    flex-direction: row;
+  }
+
+  .screen {
+    width: 70%;
+    height: 600px;
+  }
+
+  .chat-section {
+    width: 30%;
+  }
+}
+
+/* Desktops and up */
+@media (min-width: 1024px) {
+  header {
+    flex-wrap: nowrap;
+  }
+
+  .search {
+    width: 600px;
+    margin: 0 20px;
+  }
+
+  .screen {
+    height: 700px;
+  }
+
+  #blackboard-container {
+    height: 700px;
+  }
 }
