@@ -1,10 +1,14 @@
 const fs = require('fs');
 const cookieParser = require("cookie-parser");
+
+const authenticateUser = require('./middleware/authMiddleware');
+
 const PDFDocument = require('pdfkit');
 const express = require("express");
 const app = express(); // Initialize Express app
 const path = require("path");
 const mongoose = require("mongoose");
+
 const bcrypt = require('bcryptjs'); // Import bcrypt for password hashing
 const User = require("./models/User");
 const Notes = require("./models/Notes");
@@ -20,7 +24,6 @@ app.use(cookieParser()); // Enables reading cookies
 // Set EJS as the template engine
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
-
 // Middleware to parse form data
 app.use(express.urlencoded({ extended: true }));
 
@@ -33,7 +36,7 @@ const dbURI = process.env.dbURI;
 
 
 
-mongoose.connect(process.env.dbURI)
+mongoose.connect(dbURI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("Error connecting to MongoDB Atlas:", err));
 
@@ -43,8 +46,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 
-// Global variables
-let permanentEmail = null;
+
 app.get('/class', async (req, res) => {
     try {
         const notes = await Notes.find(); // Fetch all notes from MongoDB
@@ -57,7 +59,7 @@ app.get('/class', async (req, res) => {
 
 const FLASK_API_URL = "https://orove-ai.onrender.com/chat"; // Flask API endpoint
 
-app.post("/api/search", async (req, res) => {
+app.post("/api/search",authenticateUser,  async (req, res) => {
     try {
         const { message } = req.body;
         if (!message) {
@@ -71,7 +73,7 @@ app.post("/api/search", async (req, res) => {
         try {
             
             const newNotes = new Notes({
-                email:permanentEmail,
+                email: req.user.email,
                 topic: message,
                 shortnotes: response2.data.response,
             });
@@ -91,7 +93,7 @@ app.post("/api/search", async (req, res) => {
         return res.status(500).json({ error: "Internal server error" });
     }
 });
-app.post("/api/chat", async (req, res) => {
+app.post("/api/chat",authenticateUser,  async (req, res) => {
     try {
         const { message } = req.body;
         if (!message) {
@@ -183,20 +185,20 @@ app.get("/home", (req, res) => {
 /////profile///////////////////////////////////////////////////////////////////////////////////
 
 
-app.get('/profile', async(req, res) => {
-    if (permanentEmail==null) {
+app.get('/profile',authenticateUser, async(req, res) => {
+    if (req.user.email==null) {
         // If no user session exists, redirect to the signup page
         return res.redirect('/');
     }
-    const user = await User.findOne({ email: { $regex: `^${permanentEmail}$`, $options: 'i' } });
+     const user = await User.findOne({ email: req.user.email });
 
     const profile =  user;
     res.render('profile', { profile });
 });
 /////notes/////////////////////////////////////////////////////////////////////////////////
-app.get('/notes', async (req, res) => {
+app.get('/notes',authenticateUser, async (req, res) => {
     try {
-        const notes = await Notes.find({ email: permanentEmail }); // Mongoose uses `.find()`
+       const notes = await Notes.find({ email: req.user.email });
         res.render('notes', { notes });
     } catch (error) {
         console.error(error);
@@ -229,7 +231,8 @@ app.post("/signup", async (req, res) => {
         }
 
         // Hash password before saving
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
         // Create a new user
         const newUser = new User({
@@ -242,7 +245,18 @@ app.post("/signup", async (req, res) => {
         await newUser.save();
         console.log("User registered successfully");
 
-        permanentEmail = newUser.email;
+        
+        // Generate JWT token
+        const token = jwt.sign({ email: trimmedEmail }, your_secret_key, { expiresIn: "7d" });
+        console.log("Generated Token:", token);
+        // Store token in HTTP-only cookie
+        res.cookie("auth_token", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "Strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+        });
+
         res.redirect("/home"); // Redirect to home page
 
     } catch (err) {
@@ -259,19 +273,24 @@ app.get('/', (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    permanentEmail = email; // Ensure this variable is declared properly
+    // Ensure this variable is declared properly
     try {
         console.log('Email entered:', email);
+        console.log('pass entered:', req.body.password);
         const trimmedEmail = email.trim();
         const user = await User.findOne({ email: { $regex: `^${trimmedEmail}$`, $options: 'i' } });
 
         if (!user) {
             return res.render('index', { errorMessage: 'This user does not exist, please sign up first.' });
         }
+console.log('pass of user:', user.password);
+       const isMatch = await bcrypt.compare(req.body.password, user.password);
+       console.log("Match:", await bcrypt.compare(req.body.password,user.password));
 
-        if (user.password !== password) {
-            return res.render('index', { errorMessage: 'Password is wrong, please try again.' });
-        }
+if (!isMatch) {
+    return res.render('index', { errorMessage: 'Password is wrong, please try again.' });
+}
+
 
         console.log('User authenticated successfully');
 
@@ -295,22 +314,6 @@ app.post('/login', async (req, res) => {
     }
 });
 
-///midleware login///////////////////////////////////////////////////////////////////
-const authenticateUser = (req, res, next) => {
-    const token = req.cookies.auth_token;
-    if (!token) {
-        return res.status(401).json({ message: "Unauthorized" });
-    }
-
-    try {
-        const decoded = jwt.verify(token, your_secret_key);
-        req.user = decoded; // Attach user info to request
-        next();
-    } catch (error) {
-        res.status(401).json({ message: "Invalid token" });
-    }
-};
-
 // Use this middleware for protected routes
 app.get("/protected-route", authenticateUser, (req, res) => {
     res.json({ message: "Access granted", user: req.user });
@@ -321,6 +324,8 @@ app.get("/protected-route", authenticateUser, (req, res) => {
 app.post("/logout", (req, res) => {
     res.clearCookie("auth_token");
     res.json({ message: "Logged out" });
+     res.clearCookie('token');
+    res.redirect('/');
 });
 // Start server
 app.listen(PORT, () => {

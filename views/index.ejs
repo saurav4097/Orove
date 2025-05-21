@@ -30,7 +30,7 @@
                 </div>
                 <div class="input-container">
                     <i class="fa fa-lock"></i>
-                    <input type="password" placeholder="Password" class="input-field" name="password" required>
+                    <input type="password" placeholder="password" class="input-field" name="password" required>
                 </div>
                 <div class="remember-forgot">
                     <label><input type="checkbox"> Remember</label>
@@ -47,48 +47,6 @@
             
         </div>
     </div>
-    <script>
-        const loginUser = async (email, password) => {
-            try {
-                const response = await axios.post('/login', { email, password }, { withCredentials: true })
-                .then(response => {
-                    console.log("Login Response:", response.data.message);
-                    
-                    // Redirect the user to /home
-                    window.location.href = "/home";
-                })
-                .catch(error => {
-                    console.error("Login Error:", error.response?.data?.message || "Something went wrong");
-                    alert("Login failed! Check your credentials.");
-                });
-            
-                
-        
-                if (response.data.message === "Login successful") {
-                    console.log("User logged in successfully");
-                    window.location.reload(); // Refresh to apply authentication
-                }
-            } catch (error) {
-                console.error("Login failed:", error.response?.data?.message);
-            }
-        };
-        
-        const checkLogin = async () => {
-            try {
-                const response = await axios.get("/protected-route", { withCredentials: true });
-                console.log("User is already logged in:", response.data.user);
-                document.getElementById("user-email").innerText = response.data.user.email; // Show email in UI
-            } catch (error) {
-                console.log("User is not logged in");
-            }
-        };
-        
-        // Call this function on page load
-        window.onload = checkLogin;
-        
-
-
-        
-    </script>
+    
 </body>
 </html>
