@@ -3,7 +3,7 @@ const fs = require('fs');
 const cookieParser = require("cookie-parser");
 
 const authenticateUser = require('./middleware/authMiddleware');
-const { createCanvas } = require('canvas'); // For background color workaround (optional)
+
 const PDFDocument = require('pdfkit');
 const express = require("express");
 const app = express(); // Initialize Express app
