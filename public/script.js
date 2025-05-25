@@ -14,6 +14,10 @@ async function performSearch() {
         alert("Please enter a search query.");
         return;
     }
+const blackboard = document.getElementById("blackboard");
+      // Show spinner BEFORE fetch
+  blackboard.innerHTML = '<div id="loadingSpinner" class="spinner">Loading...</div>';
+  console.log("Spinner added"); // <-- Check if this runs
 
     try {
         const response = await fetch(`${baseURL}/api/search`, {
@@ -23,8 +27,7 @@ async function performSearch() {
             },
             body: JSON.stringify({ message: searchInput }),
         });
-        const blackboard = document.getElementById("blackboard");
-        blackboard.innerHTML = '<div id="loadingSpinner" class="spinner"></div>'; // Show loading spinner
+        
         const data = await response.json();
         if (data.response) {
            
@@ -192,7 +195,8 @@ async function sendMessage() {
 
         const data = await response.json();
         if (data.response) {
-            chatBox.innerHTML += `<div class="chat-message bot">${data.response}</div>`;
+           chatBox.innerHTML += `<div class="chat-message bot">${formatMarkdown(data.response)}</div>`;
+
         } else {
             chatBox.innerHTML += `<div class="chat-message bot">Error: ${data.error}</div>`;
         }
@@ -209,51 +213,7 @@ async function sendMessage() {
 
 const PDFDocument = require('pdfkit');
 
-app.get('/download/:id', async (req, res) => {
-    try {
-        const note = await Notes.findById(req.params.id);
-        if (!note) return res.status(404).send('Note not found');
 
-        const doc = new PDFDocument();
-        res.setHeader('Content-Disposition', `attachment; filename="${note.topic}.pdf"`);
-        res.setHeader('Content-Type', 'application/pdf');
-
-        doc.pipe(res);
-
-        // Function to format text properly
-        function formatText(text) {
-            const lines = text.split("\n");
-
-            lines.forEach(line => {
-                if (line.startsWith("### ")) {
-                    doc.fontSize(16).font('Helvetica-Bold').text(line.replace("### ", ""), { underline: true });
-                } else if (line.startsWith("## ")) {
-                    doc.fontSize(18).font('Helvetica-Bold').text(line.replace("## ", ""), { underline: true });
-                } else if (line.startsWith("# ")) {
-                    doc.fontSize(20).font('Helvetica-Bold').text(line.replace("# ", ""), { underline: true });
-                } else if (line.match(/\*\*(.*?)\*\*/)) {
-                    const boldText = line.replace(/\*\*(.*?)\*\*/g, (_, match) => match);
-                    doc.fontSize(12).font('Helvetica-Bold').text(boldText);
-                } else if (line.startsWith("* ")) {
-                    doc.fontSize(12).font('Helvetica').text(`• ${line.substring(2)}`);
-                } else {
-                    doc.fontSize(12).font('Helvetica').text(line);
-                }
-            });
-        }
-
-        // Title
-        doc.fontSize(16).font('Helvetica-Bold').text(`Topic: ${note.topic}\n`, { underline: true });
-
-        // Convert formatted markdown into PDF
-        formatText(note.shortnotes);
-
-        doc.end();
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Server Error');
-    }
-});
 
 async function updateNotes(topic) {
     try {
@@ -278,12 +238,14 @@ async function updateNotes(topic) {
                 const downloadCell = document.createElement("td");
                 const downloadButton = document.createElement("button");
                 downloadButton.textContent = "Download PDF";
+                
                 downloadButton.onclick = () => window.location.href = `/download/${note._id}`;
 
                 downloadCell.appendChild(downloadButton);
                 row.appendChild(downloadCell);
 
                 notesTable.appendChild(row);
+               
             });
         } else {
             notesTable.innerHTML = "<tr><td colspan='2'>No notes found</td></tr>";

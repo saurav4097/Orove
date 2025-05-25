@@ -1,14 +1,15 @@
+const { join } = require('path');
 const fs = require('fs');
 const cookieParser = require("cookie-parser");
 
 const authenticateUser = require('./middleware/authMiddleware');
-
+const { createCanvas } = require('canvas'); // For background color workaround (optional)
 const PDFDocument = require('pdfkit');
 const express = require("express");
 const app = express(); // Initialize Express app
 const path = require("path");
 const mongoose = require("mongoose");
-
+const router = express.Router();
 const bcrypt = require('bcryptjs'); // Import bcrypt for password hashing
 const User = require("./models/User");
 const Notes = require("./models/Notes");
@@ -112,51 +113,66 @@ app.post("/api/chat",authenticateUser,  async (req, res) => {
 });
 
 
+// === Download note as PDF ===
 app.get('/download/:id', async (req, res) => {
     try {
         const note = await Notes.findById(req.params.id);
-        if (!note) {
-            return res.status(404).send("Note not found");
-        }
+        if (!note) return res.status(404).send('Note not found');
 
-        // Create a new PDF document
-        const doc = new PDFDocument();
-        const filePath = path.join(__dirname, 'downloads', `note-${note._id}.pdf`);
+        const doc = new PDFDocument({ margin: 50 });
+        res.setHeader('Content-Disposition', `attachment; filename="${note.topic}.pdf"`);
+        res.setHeader('Content-Type', 'application/pdf');
+        doc.pipe(res);
 
-        // Ensure the 'downloads' folder exists
-        if (!fs.existsSync(path.join(__dirname, 'downloads'))) {
-            fs.mkdirSync(path.join(__dirname, 'downloads'));
-        }
+        // === Pale Yellow Background (full page) ===
+        const pageWidth = doc.page.width;
+        const pageHeight = doc.page.height;
+        doc.rect(0, 0, pageWidth, pageHeight).fill('#FFFACD'); // Pale yellow
 
-        // Write PDF to file
-        const writeStream = fs.createWriteStream(filePath);
-        doc.pipe(writeStream);
+        doc.fillColor('#000'); // Reset to black text
 
-        // Add note content
-        doc.fontSize(18).text(`Topic: ${note.topic}`, { underline: true });
-        doc.moveDown();
-        doc.fontSize(14).text(`Notes:`);
-        doc.moveDown();
-        doc.fontSize(12).text(note.shortnotes, { align: 'justify' });
+        // === Title ===
+        doc.fontSize(24).fillColor('#2E8B57').font('Helvetica-Bold')
+           .text(`📝 Topic: ${note.topic}`, { underline: true, align: 'center' })
+           .moveDown(1.5);
 
-        // Finalize PDF
-        doc.end();
+        // === Function to format and beautify content ===
+        function formatText(text) {
+            const lines = text.split("\n");
 
-        // When writing finishes, send file to user
-        writeStream.on('finish', () => {
-            res.download(filePath, `note-${note._id}.pdf`, (err) => {
-                if (err) {
-                    console.error("Error sending file:", err);
-                    res.status(500).send("Error downloading file");
+            lines.forEach(line => {
+                doc.moveDown(0.5);
+
+                if (line.startsWith("### ")) {
+                    doc.fontSize(16).fillColor('#4682B4').font('Helvetica-Bold')
+                       .text("🔹 " + line.replace("### ", ""));
+                } else if (line.startsWith("## ")) {
+                    doc.fontSize(18).fillColor('#6A5ACD').font('Helvetica-Bold')
+                       .text("🔷 " + line.replace("## ", ""));
+                } else if (line.startsWith("# ")) {
+                    doc.fontSize(20).fillColor('#B22222').font('Helvetica-Bold')
+                       .text("⭐ " + line.replace("# ", ""));
+                } else if (line.match(/\*\*(.*?)\*\*/)) {
+                    const boldText = line.replace(/\*\*(.*?)\*\*/g, (_, match) => match);
+                    doc.fontSize(13).fillColor('#000').font('Helvetica-Bold')
+                       .text(boldText, { indent: 10 });
+                } else if (line.startsWith("* ")) {
+                    doc.fontSize(12).fillColor('#000080').font('Helvetica')
+                       .text(`• ${line.substring(2)}`, { indent: 20 });
+                } else if (line.trim() === "") {
+                    doc.moveDown(0.5); // Extra spacing for empty lines
+                } else {
+                    doc.fontSize(12).fillColor('#333').font('Helvetica')
+                       .text(line, { indent: 10 });
                 }
-                // Optionally delete file after download
-                setTimeout(() => fs.unlinkSync(filePath), 30000); // Deletes after 30s
             });
-        });
+        }
 
+        formatText(note.shortnotes);
+        doc.end();
     } catch (error) {
         console.error(error);
-        res.status(500).send("Server error");
+        res.status(500).send('Server Error');
     }
 });
 app.get("/api/notes", async (req, res) => {
@@ -179,7 +195,7 @@ app.get("/api/notes", async (req, res) => {
 });
 
 
-app.get("/home", (req, res) => {
+app.get("/home",authenticateUser, (req, res) => {
     res.render("home", { errorMessage: null });
 });
 /////profile///////////////////////////////////////////////////////////////////////////////////
