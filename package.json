@@ -6,6 +6,9 @@
     "start": "node index.js",
     "build": "npm install && npm rebuild canvas"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "author": "",
   "license": "ISC",
   "description": "",
