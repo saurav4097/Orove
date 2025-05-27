@@ -8,11 +8,13 @@
 body {
     background-image: url("images/home_background.jpg");
     background-size: cover;
+    background-position: center;
     color: #2E3A59;
 }
 
+/* Navbar */
 header {
-    padding: 20px;
+    padding: clamp(1rem, 2vw, 2rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -23,13 +25,13 @@ nav {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 0 50px;
+    padding: 0 clamp(1rem, 4vw, 3rem);
     align-items: center;
     flex-wrap: wrap;
 }
 
 .logo {
-    font-size: 24px;
+    font-size: clamp(1.5rem, 2.5vw, 2.5rem);
     font-weight: bold;
 }
 
@@ -43,36 +45,39 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
-    gap: 20px;
+    gap: clamp(1rem, 2vw, 2rem);
 }
 
 nav ul li a {
     text-decoration: none;
     color: #2E3A59;
     font-weight: bold;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
 }
 
+/* Button */
 .btn {
     background: #2E3A59;
     color: white;
-    padding: 10px 20px;
+    padding: clamp(0.5rem, 1vw, 0.75rem) clamp(1rem, 2vw, 1.5rem);
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    white-space: nowrap;      /* Prevent text from wrapping */
-    width: max-content;       /* Prevents it from stretching */
-    min-width: 100px;         /* Optional: set a minimum width */
-    max-width: 120px;         /* Optional: set a max width */
-    text-align: center;       /* Center the text */
-    overflow: hidden;         /* Hide overflow if text grows */
-    text-overflow: ellipsis;  /* Add ... if content is too long */
+    white-space: nowrap;
+    min-width: 100px;
+    max-width: 150px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: clamp(0.9rem, 1.2vw, 1rem);
 }
+
 /* Hero Section */
 .hero {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px;
+    padding: clamp(2rem, 5vw, 4rem);
     flex-wrap: wrap;
 }
 
@@ -81,7 +86,8 @@ nav ul li a {
 }
 
 .text-content h1 {
-    font-size: 48px;
+    font-size: clamp(2rem, 6vw, 4rem);
+    margin-bottom: 0.5rem;
 }
 
 .text-content h1 span {
@@ -90,26 +96,27 @@ nav ul li a {
 
 .text-content h2 {
     color: #64B6F7;
-    margin-bottom: 20px;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 1rem;
 }
 
 .text-content p {
-    font-size: 16px;
-    margin-bottom: 20px;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    margin-bottom: 1.5rem;
 }
 
 .social-icons {
-    margin-top: 20px;
+    margin-top: 1rem;
 }
 
 .social-icons i {
-    font-size: 20px;
+    font-size: clamp(1rem, 2vw, 1.5rem);
     margin-right: 10px;
     color: #2E3A59;
 }
 
 .image-content img {
-    width: 400px;
+    width: clamp(250px, 40vw, 400px);
 }
 
 /* Responsive Navbar */
@@ -140,5 +147,19 @@ nav ul li a {
     .btn {
         width: 100%;
         margin-top: 10px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .text-content {
+        max-width: 100%;
+    }
+
+    .image-content img {
+        width: 90%;
+        margin-top: 1rem;
     }
 }

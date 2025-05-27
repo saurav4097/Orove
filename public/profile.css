@@ -1,136 +1,182 @@
+/* Reset */
 body {
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
 }
 
+/* Container scales based on viewport */
 .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    border-radius: 10px;
+  width: 90vw;
+  max-width: 60rem;
+  margin: 5vh auto;
+  padding: 2vw;
+  box-shadow: 0 0.5vw 1.5vw rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 1vw;
 }
 
 header {
-    margin-bottom: 20px;
+  margin-bottom: 2vh;
 }
 
+/* Top navigation bar */
 .bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #e0e0e0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vh 0;
+  border-bottom: 0.1vw solid #e0e0e0;
 }
 
+/* Logo */
 .brand {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 700;
+  font-family: 'Playfair Display', serif;
+  font-size: 2vw;
+  font-weight: 700;
 }
 
 .second-bar {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .back-button {
-    padding: 8px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    font-family: 'Roboto', sans-serif;
+  padding: 0.8vh 2vw;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.5vw;
+  font-size: 1vw;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
 }
 
+/* Main Content */
 main {
-    padding: 20px;
+  padding: 2vh 1vw;
 }
 
 .profile h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+  font-family: 'Playfair Display', serif;
+  font-size: 2vw;
+  margin-bottom: 1vh;
 }
 
+/* Profile Details Section */
 .profile-details {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 2vw;
+  flex-wrap: wrap;
 }
 
 .avatar {
-    font-size: 4rem;
-    background-color: #007bff;
-    color: #fff;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  font-size: 5vw;
+  background-color: #007bff;
+  color: #fff;
+  width: 6vw;
+  height: 6vw;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .info {
-    font-size: 1rem;
+  font-size: 1.2vw;
 }
 
 .info .name,
 .info .email {
-    margin: 5px 0;
+  margin: 0.5vh 0;
 }
 
 .info span {
-    font-weight: 700;
+  font-weight: 700;
 }
 
+/* Action Cards */
 .actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2vw;
+  margin-top: 3vh;
 }
 
 .card {
-    width: 45%;
-    text-align: center;
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    font-family: 'Roboto', sans-serif;
-    transition: transform 0.2s;
+  flex: 1 1 45%;
+  text-align: center;
+  background-color: #f0f0f0;
+  padding: 2vh 1vw;
+  border-radius: 1vw;
+  box-shadow: 0 0.3vw 1vw rgba(0, 0, 0, 0.1);
+  font-family: 'Roboto', sans-serif;
+  transition: transform 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-0.5vw);
 }
 
 .card .logo {
-    font-size: 2rem;
-    margin-bottom: 10px;
+  font-size: 2.5vw;
+  margin-bottom: 1vh;
 }
 
+/* Optional button */
 .shop-more {
-    margin-top: 20px;
-    text-align: center;
+  margin-top: 3vh;
+  text-align: center;
 }
 
 .shop-more button {
-    padding: 10px 30px;
-    background-color: #28a745;
-    color: #fff;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Roboto', sans-serif;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.2vh 3vw;
+  background-color: #28a745;
+  color: #fff;
+  font-size: 1.5vw;
+  border: none;
+  border-radius: 0.5vw;
+  cursor: pointer;
+  font-family: 'Roboto', sans-serif;
+  box-shadow: 0 0.5vw 1vw rgba(0, 0, 0, 0.1);
 }
 
 .shop-more button:hover {
-    background-color: #218838;
+  background-color: #218838;
+}
+
+/* Responsive Tweaks */
+@media screen and (max-width: 768px) {
+  .avatar {
+    width: 15vw;
+    height: 15vw;
+    font-size: 8vw;
+  }
+
+  .info {
+    font-size: 3.5vw;
+  }
+
+  .brand {
+    font-size: 6vw;
+  }
+
+  .back-button {
+    font-size: 3.5vw;
+    padding: 1vh 4vw;
+  }
+
+  .card {
+    flex: 1 1 100%;
+  }
+
+  .card .logo {
+    font-size: 5vw;
+  }
+
+  .shop-more button {
+    font-size: 4vw;
+  }
 }
