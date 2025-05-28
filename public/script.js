@@ -4,9 +4,7 @@ let rawText = ""; // Store text for resuming
 let currentText = ""; // Store full text to be written
 
 let utterance; // Global speech instance
-const baseURL = window.location.hostname === "localhost"
-  ? "http://localhost:3000"
-  : "https://orove-node1.onrender.com";
+
 
 async function performSearch() {
     const searchInput = document.getElementById("searchInput").value.trim();
@@ -20,7 +18,7 @@ const blackboard = document.getElementById("blackboard");
   console.log("Spinner added"); // <-- Check if this runs
 
     try {
-        const response = await fetch(`${baseURL}/api/search`, {
+        const response = await fetch(`/api/search`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -185,7 +183,7 @@ async function sendMessage() {
     chatBox.innerHTML += `<div class="chat-message user">${chatInput}</div>`;
 
     try {
-        const response = await fetch(`${baseURL}/api/chat`, {
+        const response = await fetch(`/api/chat`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -217,7 +215,7 @@ const PDFDocument = require('pdfkit');
 
 async function updateNotes(topic) {
     try {
-        const response = await fetch(`${baseURL}/api/notes?topic=${encodeURIComponent(topic)}`);
+        const response = await fetch(`/api/notes?topic=${encodeURIComponent(topic)}`);
         const notes = await response.json();
 
         console.log("Received notes:", notes); // Debugging output

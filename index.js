@@ -3,7 +3,7 @@ const fs = require('fs');
 const cookieParser = require("cookie-parser");
 
 const authenticateUser = require('./middleware/authMiddleware');
-
+const { getGeminiResponse } = require("./geminiHandler");
 const PDFDocument = require('pdfkit');
 const express = require("express");
 const app = express(); // Initialize Express app
@@ -58,7 +58,7 @@ app.get('/class', async (req, res) => {
     }
 });
 
-const FLASK_API_URL = "https://orove-ai.onrender.com/chat"; // Flask API endpoint
+
 
 app.post("/api/search",authenticateUser,  async (req, res) => {
     try {
@@ -67,16 +67,19 @@ app.post("/api/search",authenticateUser,  async (req, res) => {
             return res.status(400).json({ error: "No message provided" });
         }
 
-        // Send request to Flask API
+
         
-        const response = await axios.post(FLASK_API_URL, {message: "write the content for class  blackboard about this topic " + message});
-        const response2 = await axios.post(FLASK_API_URL, { message: "write class notes for " + message });
+const prompt1 ="write the content for class  blackboard about this topic " + message;
+const prompt2="write class notes for " + message;
+        const response =await getGeminiResponse(prompt1);
+        const response2 = await getGeminiResponse(prompt2);
+
         try {
             
             const newNotes = new Notes({
                 email: req.user.email,
                 topic: message,
-                shortnotes: response2.data.response,
+                shortnotes: response2,
             });
         
             await newNotes.save();
@@ -88,7 +91,8 @@ app.post("/api/search",authenticateUser,  async (req, res) => {
         }
         
 
-        return res.json(response.data);
+        return res.json({ response });
+
     } catch (error) {
         console.error("Error:", error.message);
         return res.status(500).json({ error: "Internal server error" });
@@ -101,11 +105,11 @@ app.post("/api/chat",authenticateUser,  async (req, res) => {
             return res.status(400).json({ error: "No message provided" });
         }
 
-        // Send request to Flask API
-        const response = await axios.post(FLASK_API_URL, { message: "solve the doubt    " + message });
+      const prompt="solve the doubt    " + message ;
+        const response = await getGeminiResponse(prompt);
         
 
-        return res.json(response.data);
+       return res.json({ response });
     } catch (error) {
         console.error("Error:", error.message);
         return res.status(500).json({ error: "Internal server error" });
